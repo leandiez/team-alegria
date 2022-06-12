@@ -7,7 +7,7 @@ public class movimiento : MonoBehaviour
 {
     void Start()
     {
-        
+
     }
 
     void Update()
