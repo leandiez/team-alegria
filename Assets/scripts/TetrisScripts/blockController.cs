@@ -5,16 +5,15 @@ using UnityEngine;
 public class blockController : MonoBehaviour
 {
     bool buttonPressed = false;
-    // Start is called before the first frame update
+    float passedTime = 0.0f;
     void Start()
     {
 
     }
 
-
-    // Update is called once per frame
     void Update()
     {
+        passedTime += Time.deltaTime;
         if (Input.GetAxis("Horizontal") > 0 && !buttonPressed)
         {
             gameObject.transform.position += new Vector3(1, 0, 0);
@@ -28,6 +27,12 @@ public class blockController : MonoBehaviour
         else if (Input.GetAxis("Horizontal") == 0)
         {
             buttonPressed = false;
+        }
+
+        if (passedTime >= tetrisController.instance.fallTime)
+        {
+            gameObject.transform.position += new Vector3(0, -1, 0);
+            passedTime = 0.0f;
         }
     }
 }

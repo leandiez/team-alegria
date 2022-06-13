@@ -778,10 +778,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 549383507}
     m_Modifications:
-    - target: {fileID: 1346302212, guid: 6139bfee46202c34ab29e8f8dfc650e2, type: 3}
-      propertyPath: m_text
-      value: Dog hunt
-      objectReference: {fileID: 0}
     - target: {fileID: 1581106895811662221, guid: 6139bfee46202c34ab29e8f8dfc650e2, type: 3}
       propertyPath: m_RootOrder
       value: 1
