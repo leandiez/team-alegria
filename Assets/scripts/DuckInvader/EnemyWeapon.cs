@@ -5,9 +5,13 @@ using UnityEngine;
 public class EnemyWeapon : MonoBehaviour
 {
     [SerializeField] EnemyBullet bala;
-    [SerializeField] int shootingSpeed;
+    [SerializeField] float shootingSpeed;
     [SerializeField] GameObject player;
 
+    private void Awake()
+    {
+        Debug.Log(this.gameObject.name + " " + player.transform.position);
+    }
     void Update()
     {
         Vector2 target = player.transform.position;
@@ -15,11 +19,9 @@ public class EnemyWeapon : MonoBehaviour
         var direction = target - current;
         var angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) +90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        float f = shootingSpeed * Time.deltaTime;
-        Debug.Log(f);
-        //if (Random.Range(0, 500) < shootingSpeed * Time.deltaTime)
-        //{
-        //    Instantiate(bala, transform.position, transform.rotation);
-        //}
+        if ((Random.Range(0, 5000)* Time.deltaTime) < (shootingSpeed * Time.deltaTime))
+        {
+            Instantiate(bala, transform.position, transform.rotation);
+        }
     }
 }
