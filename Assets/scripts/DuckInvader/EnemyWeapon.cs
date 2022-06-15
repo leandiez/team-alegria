@@ -6,22 +6,26 @@ public class EnemyWeapon : MonoBehaviour
 {
     [SerializeField] EnemyBullet bala;
     [SerializeField] float shootingSpeed;
-    [SerializeField] GameObject player;
+    [SerializeField] PlayerController player;
 
     private void Awake()
     {
-        Debug.Log(this.gameObject.name + " " + player.transform.position);
+        player = FindObjectOfType<PlayerController>();
     }
     void Update()
     {
-        Vector2 target = player.transform.position;
+        if(Time.time > 2)
+        {
+            if (Random.Range(0, 10000) < shootingSpeed)
+            {
+                Instantiate(bala, transform.position, transform.rotation);
+            }
+        }
+        Vector2 target = player.pos;
         Vector2 current = transform.position;
         var direction = target - current;
         var angle = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg) +90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        if ((Random.Range(0, 5000)* Time.deltaTime) < (shootingSpeed * Time.deltaTime))
-        {
-            Instantiate(bala, transform.position, transform.rotation);
-        }
+        
     }
 }
