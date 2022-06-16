@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 
 public class menu_opciones : MonoBehaviour
-{
-    //elegir resoluciones
-    public List<resolution_item> resolutions = new List<resolution_item>();
-    public int selected_resolution;
-
-    public TMP_Text resolutionlabel;
-    public Toggle PantallaCompletaTog;
-    private bool found_Resolution = false ;
-
+{    
     [System.Serializable]
     public class resolution_item
     {
         public int horizontal, vertical;
 
     }
+    //elegir resoluciones
+    public List<resolution_item> resolutions = new List<resolution_item>();
+    private int selected_resolution;
+
+    public TMP_Text resolutionlabel;
+    public Toggle PantallaCompletaTog;
+    private bool found_Resolution = false;
+
+    public AudioMixer theMixer;
+    public TMP_Text masterLabel, musicLabel, efectosLabel;
+    public Slider masterSlider, musicSlider, efectosSlider;
 
     public void Start()
     {
@@ -31,18 +35,19 @@ public class menu_opciones : MonoBehaviour
                 found_Resolution = true;
                 selected_resolution = i;
                 updateResolutionLabel();
+
             }
         }
 
         //si en la busqueda de resoluciones no encuentra una conicidencia, se adapta a la resolución de la pantalla del jugador
-        if (!found_Resolution)
+       if (found_Resolution == false)
         {
             resolution_item new_resolution = new resolution_item();
             new_resolution.horizontal = Screen.width;
             new_resolution.vertical = Screen.height;
 
             resolutions.Add(new_resolution);
-            selected_resolution = resolutions.Count - 1; //problema para arreglar
+            selected_resolution = resolutions.Count - 1;
 
             updateResolutionLabel();
 
@@ -88,4 +93,30 @@ public class menu_opciones : MonoBehaviour
 
     }
 
+    public void setMasterVol()
+    {
+
+        masterLabel.text = Mathf.RoundToInt(masterSlider.value +100).ToString();
+
+        theMixer.SetFloat("Master", masterSlider.value);
+
+    }
+
+    public void setEfectosVol()
+    {
+
+        efectosLabel.text = Mathf.RoundToInt(efectosSlider.value + 100).ToString();
+
+        theMixer.SetFloat("Efectos", efectosSlider.value);
+
+    }
+
+    public void setMusicVol()
+    {
+
+        musicLabel.text = Mathf.RoundToInt(musicSlider.value + 100).ToString();
+
+        theMixer.SetFloat("Musica", musicSlider.value);
+
+    }
 }
