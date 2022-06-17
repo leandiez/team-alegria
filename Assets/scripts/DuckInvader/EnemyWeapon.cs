@@ -14,7 +14,7 @@ public class EnemyWeapon : MonoBehaviour
     }
     void Update()
     {
-        if(Time.time > 2)
+        if(Time.time > 2 && player.alive)
         {
             if (Random.Range(0, 10000) < shootingSpeed)
             {

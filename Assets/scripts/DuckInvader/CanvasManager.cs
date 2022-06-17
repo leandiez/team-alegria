@@ -5,6 +5,8 @@ public class CanvasManager : MonoBehaviour
 {
     [SerializeField] string menu;
     [SerializeField] string invader;
+
+
     void Update()
     {
         
@@ -17,4 +19,5 @@ public class CanvasManager : MonoBehaviour
     {
         SceneManager.LoadScene(invader);
     }
+    
 }

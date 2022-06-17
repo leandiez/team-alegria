@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameController game;
     public Vector3 pos;
     public bool alive = true;
+    public int vida = 3;
 
     void Update()
     {
@@ -42,14 +43,18 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        if (vida == 0)
+        {
+            alive = false;
+            Time.timeScale = 0;
+        }
 
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<EnemyBullet>())
         {
-            alive = false;
-            Time.timeScale = 0;
+            vida -= 1;
         }
     }
 }

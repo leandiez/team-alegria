@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.GetComponent<Bullet>())
         {
-            game.amountEnemy -= 1;
+            game.amountDeath += 1;
             Destroy(gameObject);
         }
     }
